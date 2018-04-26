@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--配置provider的名字-->
+    <dubbo:application name="pinyougou-sellergoods"/>
+    <!--配置注册中心，zookeeper是一个注册中心，provider和consumer都来这里注册，
+     zookeeper负责分配-->
+    <dubbo:registry protocol="zookeeper" port="2181" address="192.168.25.133"/>
+    <!--配置服务调用的端口-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <!--启动包扫描Service-->
+    <dubbo:annotation package="com.pinyougou.sellergoods.service"/>
+</beans>
