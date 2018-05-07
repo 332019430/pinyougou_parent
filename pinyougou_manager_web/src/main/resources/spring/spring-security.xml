@@ -11,6 +11,8 @@
     <http pattern="/img/**" security="none"></http>
     <http pattern="/js/**" security="none"></http>
     <http pattern="/plugins/**" security="none"></http>
+
+
     <!--<spel></spel>-->
     <http use-expressions="false">
         <!--拦截所有的请求，只有拥有ROLE_ADMIN的角色的人可以访问-->

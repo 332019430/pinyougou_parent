@@ -1,5 +1,7 @@
 package com.pinyougou.sellergoods.service;
 import java.util.List;
+import java.util.Map;
+
 import com.pinyougou.pojo.TbItemCat;
 
 import entity.PageResult;
@@ -57,5 +59,9 @@ public interface ItemCatService {
 	 * @return
 	 */
 	public PageResult findPage(TbItemCat itemCat, int pageNum, int pageSize);
-	
+
+    List<TbItemCat> findByParentId(Long parentId);
+
+
+
 }

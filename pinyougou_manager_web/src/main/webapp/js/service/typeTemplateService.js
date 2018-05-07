@@ -30,5 +30,7 @@ app.service('typeTemplateService',function($http){
 		return $http.post('../typeTemplate/search.do?page='+page+"&rows="+rows, searchEntity);
 	}
 
-
+    this.findType_templateList=function () {
+        return $http.get("../typeTemplate/selectTypeTemplate.do");
+    }
 });

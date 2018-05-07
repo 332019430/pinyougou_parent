@@ -13,10 +13,22 @@
     <link rel="stylesheet" href="../css/style.css">
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-    
+
+
+	<script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+	<!-- 分页组件开始 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+	<!-- 分页组件结束 -->
+
+
+	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/service/contentCategoryService.js"></script>
+	<script type="text/javascript" src="../js/controller/baseController.js"></script>
+	<script type="text/javascript" src="../js/controller/contentCategoryController.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini"  >
+<body class="hold-transition skin-red sidebar-mini"  ng-app="pinyougou" ng-controller="contentCategoryController">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -63,23 +75,24 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
-			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
-				                          <td>1</td>
-									      <td>首页轮播广告</td>
-									      <td>首页广告</td>
-									      <td>index</td>
-		                                  <td>
-			                                 <span>无效</span>	
-										     <span>有效</span>										                                    
-		                                  </td>
-		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" >修改</button>                                           
-		                                  </td>
-			                          </tr>
+								  <tr ng-repeat="entity in list">
+									  <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
+									  <td>{{entity.id}}</td>
+									  <td>{{entity.name}}</td>
+									  <td>{{entity.contentGroup}}</td>
+									  <td>{{entity.contentKey}}</td>
+									  <td>{{entity.status}}</td>
+
+									  <td class="text-center">
+										  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"
+												  ng-click="findOne(entity.id)">修改
+										  </button>
+									  </td>
+								  </tr>
 			                      </tbody>
 			                  </table>
-			                  <!--数据列表/--> 
+			                  <!--数据列表/-->
+							<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                         <!-- 数据表格 /-->
                      </div>
@@ -100,20 +113,20 @@
 			<table class="table table-bordered table-striped"  width="800px">
 		      	<tr>
 		      		<td>分类名称</td>
-		      		<td><input  class="form-control" placeholder="分类名称">  </td>
+		      		<td><input  class="form-control" placeholder="分类名称" ng-model="entity.name">  </td>
 		      	</tr>
 		      	<tr>
 		      		<td>分组</td>
-		      		<td><input  class="form-control" placeholder="分组">  </td>
+		      		<td><input  class="form-control" placeholder="分组" ng-model="entity.id">  </td>
 		      	</tr>	
 			    <tr>
 		      		<td>KEY</td>
-		      		<td><input  class="form-control" placeholder="KEY">  </td>
+		      		<td><input  class="form-control" placeholder="KEY" ng-model="entity.contentKey">  </td>
 		      	</tr>		      
 		      	<tr>
 		      		<td>是否有效</td>
 		      		<td>
-		      		 <input type="checkbox" class="icheckbox_square-blue" >
+		      		 <input type="checkbox" class="icheckbox_square-blue"checked="booleanList[entity.status]" >
 		      		</td>
 		      	</tr>  	
 			 </table>				

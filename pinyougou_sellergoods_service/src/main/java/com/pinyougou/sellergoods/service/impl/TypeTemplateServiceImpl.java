@@ -1,12 +1,17 @@
 package com.pinyougou.sellergoods.service.impl;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
+import com.pinyougou.mapper.TbSpecificationOptionMapper;
+import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbTypeTemplateMapper;
-import com.pinyougou.pojo.TbTypeTemplate;
-import com.pinyougou.pojo.TbTypeTemplateExample;
 import com.pinyougou.pojo.TbTypeTemplateExample.Criteria;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
 
@@ -95,5 +100,35 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<Map> selectTypeTemplate() {
+		List<TbTypeTemplate> tbTypeTemplates = typeTemplateMapper.selectByExample(null);
+		ArrayList<Map> tbTypeTemplateList = new ArrayList<>();
+		for (TbTypeTemplate tbTypeTemplate : tbTypeTemplates) {
+			Map map = new HashMap<>();
+			map.put("id",tbTypeTemplate.getId());
+			map.put("text",tbTypeTemplate.getName());
+			tbTypeTemplateList.add(map);
+		}
+		return tbTypeTemplateList;
+	}
+
+	@Autowired
+	private TbSpecificationOptionMapper specificationOptionMapper;
+	@Override
+	public List<Map> selectTypeTemplateSpecList(Long id) {
+		TbTypeTemplate tbTypeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
+		String specIds = tbTypeTemplate.getSpecIds();
+		List<Map> maps = JSON.parseArray(specIds, Map.class);
+		for (Map map : maps) {
+			Integer specId = (Integer)map.get("id");
+			TbSpecificationOptionExample example=new TbSpecificationOptionExample();
+			example.createCriteria().andSpecIdEqualTo(Long.valueOf(specId));
+			List<TbSpecificationOption> tbSpecificationOptions = specificationOptionMapper.selectByExample(example);
+			map.put("options",tbSpecificationOptions);
+		}
+		return maps;
+	}
+
 }

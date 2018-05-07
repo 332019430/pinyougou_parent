@@ -7,7 +7,10 @@
     <groupId>com.pinyougou</groupId>
     <artifactId>pinyougou_parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <modules>
+        <module>pinyougou_content_interface</module>
+        <module>pinyougou_content_service</module>
+    </modules>
 
 
     <packaging>pom</packaging>
