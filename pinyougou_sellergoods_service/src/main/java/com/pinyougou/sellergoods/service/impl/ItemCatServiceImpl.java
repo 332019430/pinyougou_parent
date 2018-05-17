@@ -11,6 +11,7 @@ import com.pinyougou.pojo.TbItemCatExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemCatService;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
@@ -87,17 +88,28 @@ public class ItemCatServiceImpl implements ItemCatService {
 		
 		TbItemCatExample example=new TbItemCatExample();
 		Criteria criteria = example.createCriteria();
-		
-		if(itemCat!=null){			
-				
+
+		if(itemCat!=null){
+			if(itemCat.getName()!=null && itemCat.getName().length()>0){
+				criteria.andNameLike("%"+itemCat.getName()+"%");
+			}
 		}
 		
 		Page<TbItemCat> page= (Page<TbItemCat>)itemCatMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	@Override
 	public List<TbItemCat> findByParentId(Long parentId) {
+		List<TbItemCat> all = findAll();
+		for (TbItemCat tbItemCat : all) {
+			redisTemplate.boundHashOps("itemCat").put(tbItemCat.getName(),tbItemCat.getTypeId());
+		}
+		System.out.println("缓存商品分类");
+
 
 		TbItemCatExample example=new TbItemCatExample();
 		example.createCriteria().andParentIdEqualTo(parentId);

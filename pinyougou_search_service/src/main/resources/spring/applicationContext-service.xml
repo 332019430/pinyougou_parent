@@ -13,5 +13,6 @@
     <!--配置服务调用的端口-->
     <dubbo:protocol name="dubbo" port="20882"/>
     <!--启动包扫描Service-->
-    <dubbo:annotation package="com.pinyougou.search.service.impl"/>
+    <dubbo:annotation package="com.pinyougou.search.service"/>
+    
 </beans>

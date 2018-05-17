@@ -36,10 +36,11 @@ public class SolrUtil {
             String spec = item.getSpec();//{"机身内存":"kkkk","屏幕尺寸":"4英寸"}
 
             Map specmap = JSON.parseObject(spec, Map.class);
-
+            //动态索引--map.key为索引名，map.value为索引值
             item.setSpecMap(specmap);
-
+            System.out.println(item);
         }
+
         //2.存入索引库中
         solrTemplate.saveBeans(items);
         solrTemplate.commit();

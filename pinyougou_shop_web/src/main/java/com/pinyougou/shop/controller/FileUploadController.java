@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 /**
  * @author 小郑
  * @version 1.0
@@ -21,7 +24,7 @@ public class FileUploadController {
     private String IMAGE_SERVER_URL;
 
     @RequestMapping("/upload")
-    public Result uploadFile( MultipartFile file){
+    public Result uploadFile(MultipartFile file){
 
         try {
             byte[] bytes = file.getBytes();

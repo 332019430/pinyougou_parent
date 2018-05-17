@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.List;
 
 /**
+ * 首页轮播图
  * 服务实现层
  * @author Administrator
  *

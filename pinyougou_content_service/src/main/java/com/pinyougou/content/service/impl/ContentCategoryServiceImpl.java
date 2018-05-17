@@ -13,6 +13,7 @@ import com.pinyougou.content.service.ContentCategoryService;
 import entity.PageResult;
 
 /**
+ * 首页分类
  * 服务实现层
  * @author Administrator
  *

@@ -45,7 +45,7 @@
     <beans:bean class="com.pinyougou.shop.service.UserDetailsServiceImpl" id="userDetailsService">
         <beans:property name="sellerService" ref="sellerService"></beans:property>
     </beans:bean>
-    <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"></beans:bean>
+            <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"></beans:bean>
     <!--认证-->
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsService">

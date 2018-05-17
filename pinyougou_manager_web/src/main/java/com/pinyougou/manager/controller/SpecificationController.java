@@ -21,7 +21,7 @@ import entity.Result;
 @RequestMapping("/specification")
 public class SpecificationController {
 
-	@Reference
+	@Reference( timeout = 3000)
 	private SpecificationService specificationService;
 	
 	/**
@@ -111,7 +111,7 @@ public class SpecificationController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbSpecification specification, int page, int rows  ){
-		return specificationService.findPage(specification, page, rows);		
+		return specificationService.findPage(specification, page, rows);
 	}
 
 	/**

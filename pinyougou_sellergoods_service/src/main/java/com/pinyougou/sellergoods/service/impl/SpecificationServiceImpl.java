@@ -26,7 +26,7 @@ import tk.mybatis.mapper.entity.Example;
  * @author Administrator
  *
  */
-@Service
+@Service( timeout = 5000)
 public class SpecificationServiceImpl implements SpecificationService {
 
 	@Autowired

@@ -17,6 +17,7 @@ import entity.PageResult;
  * @author Administrator
  *
  */
+
 @Service
 public class AddressServiceImpl implements AddressService {
 
@@ -27,7 +28,7 @@ public class AddressServiceImpl implements AddressService {
 	 * 查询全部
 	 */
 	@Override
-	public List<TbAddress> findAll() {
+	public  List<TbAddress> findAll() {
 		return addressMapper.selectByExample(null);
 	}
 
