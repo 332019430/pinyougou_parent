@@ -15,7 +15,7 @@ app.controller('brandController', function ($scope,$controller,brandService) {
                 if (response.success) {
                     $scope.reloadList();
                 } else {
-                    aletr("添加失败")
+                    alert("添加失败")
                 }
             }
         )
@@ -38,7 +38,7 @@ app.controller('brandController', function ($scope,$controller,brandService) {
                 if (response.success) {
                     $scope.reloadList();
                 } else {
-                    aletr("删除失败")
+                    alert("删除失败")
                 }
             }
         )
